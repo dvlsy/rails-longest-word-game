@@ -1,0 +1,18 @@
+<h1>Your Letters</h1>
+<p class="display-4"><%= @letters.join(' ') %></p>
+
+<form action="<%= score_path %>" method="post" data-turbo="false">
+  <!-- Rails CSRF protection -->
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+  <!-- Pass the letters back to #score -->
+  <%= hidden_field_tag :letters, @letters.join(' ') %>
+
+  <!-- User’s word guess -->
+  <div class="mb-3">
+    <label for="word" class="form-label">Your word:</label>
+    <%= text_field_tag :word, nil, class: "form-control", id: "word" %>
+  </div>
+
+  <%= submit_tag "Score it!", class: "btn btn-primary" %>
+</form>
